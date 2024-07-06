@@ -8,7 +8,7 @@ import (
 
 func OpenChannel() (*amqp.Channel, error) {
 	// The connection Address stays in an env file
-	conn, err := amqp.Dial("amqp://guest:guest@localhost:5672/")
+	conn, err := amqp.Dial("amqp://admin:admin@localhost:5672")
 	if err != nil {
 		panic(err)
 	}
@@ -42,7 +42,7 @@ func Publish(ctx context.Context, ch *amqp.Channel, body, exName string) error {
 	err := ch.PublishWithContext(
 		ctx,
 		exName,
-		"go-payment",
+		"PaymentDone",
 		false,
 		false,
 		amqp.Publishing{
